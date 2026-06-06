@@ -32,7 +32,6 @@ public class TelaClientes extends JFrame {
 	private JTable tabelaClientes;
 	private DefaultTableModel modeloTabela;
 	
-	// Instância do DAO para comunicação com o banco
 	private ClienteDAO clienteDAO = new ClienteDAO();
 
 	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
@@ -50,45 +49,38 @@ public class TelaClientes extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 20));
 		setContentPane(contentPane);
 
-		// --- TÍTULO ---
 		JLabel lblTitulo = new JLabel("Cadastro e Controle de Clientes");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblTitulo.setForeground(COR_PRINCIPAL);
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
 
-		// --- PAINEL CENTRAL (Formulário + Tabela) ---
 		JPanel painelCentral = new JPanel(new BorderLayout(0, 20));
 		painelCentral.setBackground(COR_FUNDO);
 
-		// Formulário GridBagLayout
 		JPanel formulario = new JPanel(new GridBagLayout());
 		formulario.setBackground(COR_FUNDO);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(6, 6, 6, 6);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		// Linha 0: Nome
 		gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0;
 		formulario.add(new JLabel("Nome / Razão Social:"), gbc);
 		gbc.gridx = 1; gbc.weightx = 1.0;
 		txtNome = new JTextField();
 		formulario.add(txtNome, gbc);
 
-		// Linha 0 (Coluna 2): CPF/CNPJ
 		gbc.gridx = 2; gbc.weightx = 0;
 		formulario.add(new JLabel("CPF / CNPJ:"), gbc);
 		gbc.gridx = 3; gbc.weightx = 0.5;
 		txtCpfCnpj = new JTextField(12);
 		formulario.add(txtCpfCnpj, gbc);
 
-		// Linha 1: Telefone
 		gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
 		formulario.add(new JLabel("Telefone:"), gbc);
 		gbc.gridx = 1; gbc.weightx = 1.0;
 		txtTelefone = new JTextField();
 		formulario.add(txtTelefone, gbc);
 
-		// Linha 1 (Coluna 2): Email
 		gbc.gridx = 2; gbc.weightx = 0;
 		formulario.add(new JLabel("E-mail:"), gbc);
 		gbc.gridx = 3; gbc.weightx = 0.5;
@@ -97,13 +89,12 @@ public class TelaClientes extends JFrame {
 
 		painelCentral.add(formulario, BorderLayout.NORTH);
 
-		// Tabela de Dados (Modificada para não permitir edição direta nas células)
 		String[] colunas = {"ID", "Nome", "CPF/CNPJ", "Telefone", "E-mail"};
 		modeloTabela = new DefaultTableModel(colunas, 0) {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				return false; // Bloqueia edição direta clicando na tabela
+				return false;
 			}
 		};
 		
@@ -113,7 +104,6 @@ public class TelaClientes extends JFrame {
 
 		contentPane.add(painelCentral, BorderLayout.CENTER);
 
-		// --- PAINEL INFERIOR (Ações) ---
 		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
 		painelBotoes.setBackground(COR_FUNDO);
 

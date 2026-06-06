@@ -20,23 +20,19 @@ public class TelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	// Identidade Visual Padronizada (Verde Eco)
 	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
 	private final Color COR_FUNDO = Color.WHITE;
 
 	public TelaPrincipal() {
-		// Configurações da Janela Principal
 		setTitle("Painel Principal - Construtora Eco");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 600);
 		setLocationRelativeTo(null); 
 
-		// --- 1. BARRA DE MENUS (Menu Superior) ---
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.WHITE);
 		setJMenuBar(menuBar);
 
-		// Menu Cadastros
 		JMenu menuCadastros = new JMenu("Cadastros");
 		menuCadastros.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		menuBar.add(menuCadastros);
@@ -56,7 +52,6 @@ public class TelaPrincipal extends JFrame {
 		itemProjetos.addActionListener(e -> abrirGerenciamentoProjetos());
 		menuCadastros.add(itemProjetos);
 
-		// Menu Sistema
 		JMenu menuSistema = new JMenu("Sistema");
 		menuSistema.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		menuBar.add(menuSistema);
@@ -71,31 +66,26 @@ public class TelaPrincipal extends JFrame {
 		itemSair.addActionListener(e -> System.exit(0));
 		menuSistema.add(itemSair);
 
-		// --- 2. CORPO PRINCIPAL DA TELA ---
 		contentPane = new JPanel();
 		contentPane.setBackground(COR_FUNDO);
 		contentPane.setBorder(new EmptyBorder(40, 60, 40, 60)); 
 		contentPane.setLayout(new BorderLayout(0, 30));
 		setContentPane(contentPane);
 
-		// Título do Dashboard
 		JLabel lblBoasVindas = new JLabel("Sistema de Gestão - Construtora Eco");
 		lblBoasVindas.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblBoasVindas.setForeground(COR_PRINCIPAL);
 		lblBoasVindas.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblBoasVindas, BorderLayout.NORTH);
 
-		// --- 3. PAINEL DE BOTÕES (DASHBOARD CENTRAL 2x2) ---
 		JPanel painelDashboard = new JPanel(new GridLayout(2, 2, 30, 30));
 		painelDashboard.setBackground(COR_FUNDO);
 
-		// Inicialização dos 4 botões simétricos
 		JButton btnUsuarios = criarBotaoDashboard("Gerenciar Usuários");
 		JButton btnProjetos = criarBotaoDashboard("Projetos / Obras");
 		JButton btnClientes = criarBotaoDashboard("Clientes"); 
 		JButton btnLogout = criarBotaoDashboard("Fazer Logout");
 
-		// Adicionando os botões na ordem correta da grelha
 		painelDashboard.add(btnUsuarios);
 		painelDashboard.add(btnProjetos);
 		painelDashboard.add(btnClientes);
@@ -103,13 +93,11 @@ public class TelaPrincipal extends JFrame {
 
 		contentPane.add(painelDashboard, BorderLayout.CENTER);
 
-		// --- CONFIGURAÇÃO DOS EVENTOS DOS BOTÕES ---
 		btnUsuarios.addActionListener(e -> abrirGerenciamentoUsuarios());
 		btnProjetos.addActionListener(e -> abrirGerenciamentoProjetos());
 		btnClientes.addActionListener(e -> abrirGerenciamentoClientes());
 		btnLogout.addActionListener(e -> executarLogout());
 
-		// Rodapé informativo
 		JLabel lblRodape = new JLabel("Módulo de Controle Interno | Versão 1.0 ");
 		lblRodape.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblRodape.setForeground(Color.GRAY);
@@ -117,9 +105,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(lblRodape, BorderLayout.SOUTH);
 	}
 
-	/**
-	 * Método auxiliar para criar botões elegantes e responsivos para o Grid
-	 */
+
 	private JButton criarBotaoDashboard(String texto) {
 		JButton botao = new JButton(texto);
 		botao.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -130,7 +116,6 @@ public class TelaPrincipal extends JFrame {
 		return botao;
 	}
 
-	// --- MÉTODOS DE NAVEGAÇÃO ---
 	
 	private void abrirGerenciamentoUsuarios() {
 		TelaGerenciarUsuarios telaUsuarios = new TelaGerenciarUsuarios();
@@ -150,6 +135,6 @@ public class TelaPrincipal extends JFrame {
 	private void executarLogout() { 
 		TelaDeLogin login = new TelaDeLogin();
 		login.setVisible(true);
-		this.dispose(); // Fecha o painel principal com segurança
+		this.dispose();
 	}
 }

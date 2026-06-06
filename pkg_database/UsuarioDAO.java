@@ -78,10 +78,7 @@ public class UsuarioDAO {
 		}
 	}
 
-	/**
-	 * CORREÇÃO: Método para autenticação na Tela de Login.
-	 * Procura no banco de dados se existe a combinação exata de usuário e senha.
-	 */
+
 	public boolean validarLogin(String login, String senha) {
 		String sql = "SELECT * FROM tb_usuarios WHERE usuario = ? AND senha = ?";
 		try (Connection conectar = Conexao.getConexao();
@@ -92,12 +89,12 @@ public class UsuarioDAO {
 			
 			try (ResultSet resultado = preparar.executeQuery()) {
 				if (resultado.next()) {
-					return true; // Credenciais corretas, utilizador encontrado!
+					return true;
 				}
 			}
 		} catch (SQLException erro) {
 			System.err.println("Erro ao validar login: " + erro.getMessage());
 		}
-		return false; // Retorna falso se não encontrar ou se ocorrer um erro
+		return false;
 	}
 }

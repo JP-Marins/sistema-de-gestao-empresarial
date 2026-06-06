@@ -7,11 +7,7 @@ public class Usuario {
 	private String senha;
 	private String perfil;
 
-	// Construtor padrão (vazio) - útil para frameworks e manipulações simples
-	public Usuario() {
-	}
 
-	// Construtor completo - utilizado pelo DAO para instanciar os dados vindos do MySQL
 	public Usuario(String id, String usuario, String senha, String perfil) {
 		this.id = id;
 		this.usuario = usuario;
@@ -19,7 +15,6 @@ public class Usuario {
 		this.perfil = perfil;
 	}
 
-	// --- GETTERS E SETTERS ---
 
 	public String getId() {
 		return id;

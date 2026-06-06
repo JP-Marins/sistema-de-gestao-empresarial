@@ -94,13 +94,11 @@ public class TelaDeLogin extends JFrame {
 		painelBotoes.add(btnSair);
 		contentPane.add(painelBotoes, BorderLayout.SOUTH);
 
-		// Eventos corrigidos com X
 		btnEntrar.addActionListener(e -> executarAcaoLogin());
 		txtSenha.addActionListener(e -> executarAcaoLogin());
 		btnSair.addActionListener(e -> System.exit(0));
 	}
 
-	// Método corrigido para "executarAcaoLogin" (com X)
 	private void executarAcaoLogin() {
 		String login = txtUsuario.getText().trim();
 		String senha = new String(txtSenha.getPassword()).trim();

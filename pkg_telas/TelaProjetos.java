@@ -43,45 +43,38 @@ public class TelaProjetos extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 20));
 		setContentPane(contentPane);
 
-		// --- TÍTULO ---
 		JLabel lblTitulo = new JLabel("Controle de Projetos e Engenharia");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblTitulo.setForeground(COR_PRINCIPAL);
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
 
-		// --- PAINEL CENTRAL (Formulário + Tabela) ---
 		JPanel painelCentral = new JPanel(new BorderLayout(0, 20));
 		painelCentral.setBackground(COR_FUNDO);
 
-		// Formulário GridBagLayout
 		JPanel formulario = new JPanel(new GridBagLayout());
 		formulario.setBackground(COR_FUNDO);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(6, 6, 6, 6);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		// Linha 0: Nome do Projeto
 		gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0;
 		formulario.add(new JLabel("Nome do Projeto/Obra:"), gbc);
 		gbc.gridx = 1; gbc.weightx = 1.0;
 		txtNomeProjeto = new JTextField();
 		formulario.add(txtNomeProjeto, gbc);
 
-		// Linha 0 (Coluna 2): Status
 		gbc.gridx = 2; gbc.weightx = 0;
 		formulario.add(new JLabel("Status:"), gbc);
 		gbc.gridx = 3; gbc.weightx = 0.4;
 		cbStatus = new JComboBox<>(new String[] {"Planejamento", "Em Execução", "Embargado", "Finalizado"});
 		formulario.add(cbStatus, gbc);
 
-		// Linha 1: Engenheiro
 		gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
 		formulario.add(new JLabel("Engenheiro Resp.:"), gbc);
 		gbc.gridx = 1; gbc.weightx = 1.0;
 		txtEngenheiro = new JTextField();
 		formulario.add(txtEngenheiro, gbc);
 
-		// Linha 1 (Coluna 2): Orçamento
 		gbc.gridx = 2; gbc.weightx = 0;
 		formulario.add(new JLabel("Orçamento (R$):"), gbc);
 		gbc.gridx = 3; gbc.weightx = 0.4;
@@ -90,7 +83,6 @@ public class TelaProjetos extends JFrame {
 
 		painelCentral.add(formulario, BorderLayout.NORTH);
 
-		// Tabela de Dados
 		String[] colunas = {"Código", "Descrição do Projeto", "Responsável", "Custo Estimado", "Status"};
 		modeloTabela = new DefaultTableModel(colunas, 0);
 		tabelaProjetos = new JTable(modeloTabela);
@@ -99,7 +91,6 @@ public class TelaProjetos extends JFrame {
 
 		contentPane.add(painelCentral, BorderLayout.CENTER);
 
-		// --- PAINEL INFERIOR (Ações) ---
 		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
 		painelBotoes.setBackground(COR_FUNDO);
 
@@ -113,7 +104,6 @@ public class TelaProjetos extends JFrame {
 		painelBotoes.add(btnVoltar);
 		contentPane.add(painelBotoes, BorderLayout.SOUTH);
 
-		// Eventos básicos
 		btnVoltar.addActionListener(e -> this.dispose());
 	}
 

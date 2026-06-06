@@ -27,14 +27,12 @@ public class TelaFinanceiro extends JFrame {
 	private JTable tabelaFinanceiro;
 	private DefaultTableModel modeloTabela;
 	
-	// CORES ALINHADAS COM A TELA PRINCIPAL (CONSTRUTORA ECO)
-	private final Color COR_PRINCIPAL = new Color(0, 146, 69); // Verde Eco
-	private final Color COR_FUNDO = Color.WHITE;               // Fundo Limpo
-	private final Color COR_PAINEIS = Color.decode("#F8F9FA");    // Cinza bem claro para contraste
+	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
+	private final Color COR_FUNDO = Color.WHITE;
+	private final Color COR_PAINEIS = Color.decode("#F8F9FA");
 	private final Font FONTE_PADRAO = new Font("Tahoma", Font.PLAIN, 14);
 	private final Font FONTE_TITULO = new Font("Tahoma", Font.BOLD, 22);
 
-	// Campos do Formulário
 	private JTextField txtId, txtDescricao, txtValor, txtData, txtProjeto;
 	private JComboBox<String> comboTipo;
 
@@ -42,7 +40,7 @@ public class TelaFinanceiro extends JFrame {
 		setTitle("Módulo Financeiro - Construtora Eco");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 850, 600);
-		setLocationRelativeTo(null); // Centraliza a tela
+		setLocationRelativeTo(null);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(COR_FUNDO);
@@ -50,7 +48,6 @@ public class TelaFinanceiro extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 15));
 		setContentPane(contentPane);
 
-		// --- PAINEL SUPERIOR: TÍTULO ---
 		JPanel painelTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		painelTitulo.setBackground(COR_FUNDO);
 		JLabel lblTitulo = new JLabel("Controle de Fluxo de Caixa / Projetos");
@@ -59,7 +56,6 @@ public class TelaFinanceiro extends JFrame {
 		painelTitulo.add(lblTitulo);
 		contentPane.add(painelTitulo, BorderLayout.NORTH);
 
-		// --- PAINEL CENTRAL: TABELA FINANCEIRA ---
 		String[] colunas = {"ID", "Descrição do Lançamento", "Valor (R$)", "Data", "Tipo", "Projeto Vinculado"};
 		modeloTabela = new DefaultTableModel(colunas, 0);
 		tabelaFinanceiro = new JTable(modeloTabela);
@@ -69,17 +65,14 @@ public class TelaFinanceiro extends JFrame {
 		JScrollPane scrollTabela = new JScrollPane(tabelaFinanceiro);
 		contentPane.add(scrollTabela, BorderLayout.CENTER);
 
-		// --- PAINEL INFERIOR: FORMULÁRIO E BOTÕES ---
 		JPanel painelInferior = new JPanel(new BorderLayout(0, 10));
 		painelInferior.setBackground(COR_FUNDO);
 
-		// Formulário com GridBagLayout (Estrutura adaptada para o WindowBuilder)
 		JPanel painelFormulario = new JPanel(new GridBagLayout());
 		painelFormulario.setBackground(COR_PAINEIS);
 		painelFormulario.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(COR_PRINCIPAL), "Movimentação Financeira", 0, 0, FONTE_PADRAO, COR_PRINCIPAL));
 
-		// --- LINHA 1: ID DO LANÇAMENTO ---
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.insets = new Insets(8, 10, 5, 10);
 		gbc_lblId.gridx = 0;
@@ -97,7 +90,6 @@ public class TelaFinanceiro extends JFrame {
 		txtId.setEditable(false);
 		painelFormulario.add(txtId, gbc_txtId);
 
-		// --- LINHA 1: DESCRIÇÃO ---
 		GridBagConstraints gbc_lblDesc = new GridBagConstraints();
 		gbc_lblDesc.insets = new Insets(8, 10, 5, 10);
 		gbc_lblDesc.gridx = 2;
@@ -115,7 +107,6 @@ public class TelaFinanceiro extends JFrame {
 		txtDescricao = new JTextField(20);
 		painelFormulario.add(txtDescricao, gbc_txtDesc);
 
-		// --- LINHA 2: VALOR ---
 		GridBagConstraints gbc_lblValor = new GridBagConstraints();
 		gbc_lblValor.insets = new Insets(5, 10, 5, 10);
 		gbc_lblValor.gridx = 0;
@@ -132,7 +123,6 @@ public class TelaFinanceiro extends JFrame {
 		txtValor = new JTextField(10);
 		painelFormulario.add(txtValor, gbc_txtValor);
 
-		// --- LINHA 2: DATA ---
 		GridBagConstraints gbc_lblData = new GridBagConstraints();
 		gbc_lblData.insets = new Insets(5, 10, 5, 10);
 		gbc_lblData.gridx = 2;
@@ -150,7 +140,6 @@ public class TelaFinanceiro extends JFrame {
 		txtData = new JTextField(10);
 		painelFormulario.add(txtData, gbc_txtData);
 
-		// --- LINHA 3: TIPO (RECEITA / DESPESA) ---
 		GridBagConstraints gbc_lblTipo = new GridBagConstraints();
 		gbc_lblTipo.insets = new Insets(5, 10, 8, 10);
 		gbc_lblTipo.gridx = 0;
@@ -168,7 +157,6 @@ public class TelaFinanceiro extends JFrame {
 		comboTipo.setFont(FONTE_PADRAO);
 		painelFormulario.add(comboTipo, gbc_comboTipo);
 
-		// --- LINHA 3: PROJETO VINCULADO ---
 		GridBagConstraints gbc_lblProj = new GridBagConstraints();
 		gbc_lblProj.insets = new Insets(5, 10, 8, 10);
 		gbc_lblProj.gridx = 2;
@@ -188,7 +176,6 @@ public class TelaFinanceiro extends JFrame {
 
 		painelInferior.add(painelFormulario, BorderLayout.CENTER);
 
-		// Painel de Ações (Botões)
 		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
 		painelBotoes.setBackground(COR_FUNDO);
 
@@ -203,10 +190,8 @@ public class TelaFinanceiro extends JFrame {
 		painelInferior.add(painelBotoes, BorderLayout.SOUTH);
 		contentPane.add(painelInferior, BorderLayout.SOUTH);
 
-		// Método temporário para popular dados na tabela
 		mockTabela();
 		
-		// Evento para capturar a linha selecionada na tabela e jogar para o formulário
 		tabelaFinanceiro.getSelectionModel().addListSelectionListener(e -> {
 			if (!e.getValueIsAdjusting() && tabelaFinanceiro.getSelectedRow() != -1) {
 				int linha = tabelaFinanceiro.getSelectedRow();
@@ -237,10 +222,8 @@ public class TelaFinanceiro extends JFrame {
 		return botao;
 	}
 
-	// Altere este método futuramente quando você criar a classe FinanceiroDAO e a tabela no MySQL
 	private void mockTabela() {
 		modeloTabela.setRowCount(0);
-		// Dados fictícios simulados para fins de visualização no WindowBuilder
 		modeloTabela.addRow(new Object[] {"1", "Compra de Sacos de Cimento", "4.500,00", "01/06/2026", "Despesa", "Residencial EcoVida"});
 		modeloTabela.addRow(new Object[] {"2", "Aporte Inicial Investidor", "150.000,00", "03/06/2026", "Receita", "Edifício GreenTower"});
 		modeloTabela.addRow(new Object[] {"3", "Pagamento de Empreiteira - Alvenaria", "22.300,00", "05/06/2026", "Despesa", "Residencial EcoVida"});

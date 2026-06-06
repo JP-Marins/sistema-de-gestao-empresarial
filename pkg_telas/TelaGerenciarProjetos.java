@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-// Importações do pacote de banco de dados
 import pkg_database.Projeto;
 import pkg_database.ProjetoDAO;
 
@@ -32,7 +31,7 @@ public class TelaGerenciarProjetos extends JFrame {
 	private JTable tabelaProjetos;
 	private DefaultTableModel modeloTabela;
 	
-	private final Color COR_PRINCIPAL = new Color(0, 146, 69); // Verde Eco
+	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
 	private final Color COR_FUNDO = Color.WHITE;
 	private final Color COR_PAINEIS = Color.decode("#F8F9FA");
 	private final Font FONTE_PADRAO = new Font("Tahoma", Font.PLAIN, 14);
@@ -41,7 +40,6 @@ public class TelaGerenciarProjetos extends JFrame {
 	private JTextField txtId, txtNome, txtDataInicio, txtDataFim, txtEngenheiro;
 	private JComboBox<String> comboStatus;
 	
-	// Instância global do DAO para persistência
 	private ProjetoDAO projetoDAO = new ProjetoDAO();
 
 	public TelaGerenciarProjetos() {
@@ -56,7 +54,6 @@ public class TelaGerenciarProjetos extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 15));
 		setContentPane(contentPane);
 
-		// --- PAINEL SUPERIOR: TÍTULO ---
 		JPanel painelTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		painelTitulo.setBackground(COR_FUNDO);
 		JLabel lblTitulo = new JLabel("Controle de Projetos de Engenharia");
@@ -65,13 +62,12 @@ public class TelaGerenciarProjetos extends JFrame {
 		painelTitulo.add(lblTitulo);
 		contentPane.add(painelTitulo, BorderLayout.NORTH);
 
-		// --- PAINEL CENTRAL: TABELA DE PROJETOS ---
 		String[] colunas = {"ID", "Nome do Projeto", "Data Início", "Data Fim", "Engenheiro Resp.", "Status"};
 		modeloTabela = new DefaultTableModel(colunas, 0) {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				return false; // Desabilita edição direta na JTable
+				return false;
 			}
 		};
 		tabelaProjetos = new JTable(modeloTabela);
@@ -81,7 +77,6 @@ public class TelaGerenciarProjetos extends JFrame {
 		JScrollPane scrollTabela = new JScrollPane(tabelaProjetos);
 		contentPane.add(scrollTabela, BorderLayout.CENTER);
 
-		// --- PAINEL INFERIOR: FORMULÁRIO E BOTÕES ---
 		JPanel painelInferior = new JPanel(new BorderLayout(0, 10));
 		painelInferior.setBackground(COR_FUNDO);
 
@@ -90,7 +85,6 @@ public class TelaGerenciarProjetos extends JFrame {
 		painelFormulario.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(COR_PRINCIPAL), "Dados do Projeto", 0, 0, FONTE_PADRAO, COR_PRINCIPAL));
 
-		// GridBagLayout - Componentes estruturados para o WindowBuilder
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.insets = new Insets(10, 10, 5, 5);
 		gbc_lblId.gridx = 0; gbc_lblId.gridy = 0;
@@ -174,7 +168,6 @@ public class TelaGerenciarProjetos extends JFrame {
 
 		painelInferior.add(painelFormulario, BorderLayout.CENTER);
 
-		// Painel de Botões de Ação
 		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
 		painelBotoes.setBackground(COR_FUNDO);
 
@@ -290,9 +283,8 @@ public class TelaGerenciarProjetos extends JFrame {
 		tabelaProjetos.clearSelection();
 	}
 
-	// Método que consulta o banco de dados e reconstrói as linhas do JTable
 	private void atualizarTabelaReal() {
-		modeloTabela.setRowCount(0); // Limpa as linhas anteriores
+		modeloTabela.setRowCount(0);
 		List<Projeto> lista = projetoDAO.listarTodos();
 		for (Projeto p : lista) {
 			modeloTabela.addRow(new Object[] {

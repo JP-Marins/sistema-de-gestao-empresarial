@@ -7,10 +7,7 @@ public class Cliente {
     private String telefone;
     private String email;
 
-    // Construtor vazio
-    public Cliente() {}
-
-    // Construtor completo
+  
     public Cliente(int id, String nome, String cpfCnpj, String telefone, String email) {
         this.id = id;
         this.nome = nome;

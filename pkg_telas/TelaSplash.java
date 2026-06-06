@@ -19,12 +19,10 @@ public class TelaSplash extends JFrame {
 	private JProgressBar barraProgresso;
 	private Timer timer;
 
-	// Identidade Visual (Verde Eco)
 	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
 	private final Color COR_FUNDO = Color.WHITE;
 
 	public TelaSplash() {
-		// Remove as bordas e botões de fechar padrão para parecer um Splash real
 		setUndecorated(true); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
@@ -36,10 +34,9 @@ public class TelaSplash extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 15));
 		setContentPane(contentPane);
 
-		// --- PAINEL CENTRAL: TEXTOS ---
 		JPanel painelCentral = new JPanel();
 		painelCentral.setBackground(COR_FUNDO);
-		painelCentral.setLayout(null); // Layout absoluto para posicionar os textos livremente
+		painelCentral.setLayout(null);
 		contentPane.add(painelCentral, BorderLayout.CENTER);
 
 		JLabel lblTitulo = new JLabel("Construtora Eco");
@@ -60,7 +57,6 @@ public class TelaSplash extends JFrame {
 		lblStatus.setBounds(5, 195, 200, 20);
 		painelCentral.add(lblStatus);
 
-		// --- PAINEL INFERIOR: BARRA DE PROGRESSO ---
 		barraProgresso = new JProgressBar();
 		barraProgresso.setStringPainted(true);
 		barraProgresso.setForeground(COR_PRINCIPAL);
@@ -68,32 +64,24 @@ public class TelaSplash extends JFrame {
 		barraProgresso.setFont(new Font("Tahoma", Font.BOLD, 12));
 		contentPane.add(barraProgresso, BorderLayout.SOUTH);
 
-		// Inicializa o carregamento do sistema
 		initializeTimer();
 	}
 
-	/**
-	 * Configura o Timer que simula o carregamento e faz a transição de telas
-	 */
 	private void initializeTimer() {
-		// O Timer vai disparar a cada 30 milissegundos
 		timer = new Timer(30, new ActionListener() {
 			private int progresso = 0;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				progresso += 2; // Incrementa a barra de 2 em 2
+				progresso += 2;
 				barraProgresso.setValue(progresso);
 
-				// Quando chegar a 100%, para o Timer e abre a próxima tela
 				if (progresso >= 100) {
 					timer.stop();
 
-					// CORREÇÃO: Instancia e exibe a tela de login dinamicamente
 					TelaDeLogin telaLogin = new TelaDeLogin();
 					telaLogin.setVisible(true);
 
-					// Fecha a tela de Splash atual
 					dispose(); 
 				}
 			}
@@ -101,9 +89,6 @@ public class TelaSplash extends JFrame {
 		timer.start();
 	}
 
-	/**
-	 * Método principal para executar o sistema a partir do Splash
-	 */
 	public static void main(String[] args) {
 		java.awt.EventQueue.invokeLater(() -> {
 			try {

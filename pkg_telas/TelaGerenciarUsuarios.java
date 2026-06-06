@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-// Importações das classes de persistência
 import pkg_database.Usuario;
 import pkg_database.UsuarioDAO;
 
@@ -33,7 +32,7 @@ public class TelaGerenciarUsuarios extends JFrame {
 	private JTable tabelaUsuarios;
 	private DefaultTableModel modeloTabela;
 	
-	private final Color COR_PRINCIPAL = new Color(0, 146, 69); // Verde Eco
+	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
 	private final Color COR_FUNDO = Color.WHITE;
 	private final Color COR_PAINEIS = Color.decode("#F8F9FA");
 	private final Font FONTE_PADRAO = new Font("Tahoma", Font.PLAIN, 14);
@@ -43,7 +42,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 	private JPasswordField txtSenha;
 	private JComboBox<String> comboPerfil;
 	
-	// Instância do DAO para persistência real
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public TelaGerenciarUsuarios() {
@@ -58,7 +56,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 15));
 		setContentPane(contentPane);
 
-		// --- PAINEL SUPERIOR: TÍTULO ---
 		JPanel painelTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		painelTitulo.setBackground(COR_FUNDO);
 		JLabel lblTitulo = new JLabel("Controle de Usuários e Acessos");
@@ -67,7 +64,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		painelTitulo.add(lblTitulo);
 		contentPane.add(painelTitulo, BorderLayout.NORTH);
 
-		// --- PAINEL CENTRAL: TABELA ---
 		String[] colunas = {"ID", "Nome de Usuário", "Perfil de Acesso"};
 		modeloTabela = new DefaultTableModel(colunas, 0) {
 			private static final long serialVersionUID = 1L;
@@ -83,7 +79,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		JScrollPane scrollTabela = new JScrollPane(tabelaUsuarios);
 		contentPane.add(scrollTabela, BorderLayout.CENTER);
 
-		// --- PAINEL INFERIOR: FORMULÁRIO ---
 		JPanel painelInferior = new JPanel(new BorderLayout(0, 10));
 		painelInferior.setBackground(COR_FUNDO);
 
@@ -92,7 +87,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		painelFormulario.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(COR_PRINCIPAL), "Dados do Usuário", 0, 0, FONTE_PADRAO, COR_PRINCIPAL));
 
-		// Linha 0: ID
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.insets = new Insets(10, 10, 5, 5);
 		gbc_lblId.gridx = 0; gbc_lblId.gridy = 0;
@@ -107,7 +101,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		txtId.setEditable(false);
 		painelFormulario.add(txtId, gbc_txtId);
 
-		// Linha 0: Usuário
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.insets = new Insets(10, 10, 5, 5);
 		gbc_lblUsuario.gridx = 2; gbc_lblUsuario.gridy = 0;
@@ -122,7 +115,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		txtUsuario = new JTextField(15);
 		painelFormulario.add(txtUsuario, gbc_txtUsuario);
 
-		// Linha 1: Senha
 		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
 		gbc_lblSenha.insets = new Insets(5, 10, 10, 5);
 		gbc_lblSenha.gridx = 0; gbc_lblSenha.gridy = 1;
@@ -136,7 +128,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 		txtSenha = new JPasswordField(10);
 		painelFormulario.add(txtSenha, gbc_txtSenha);
 
-		// Linha 1: Perfil
 		GridBagConstraints gbc_lblPerfil = new GridBagConstraints();
 		gbc_lblPerfil.insets = new Insets(5, 10, 10, 5);
 		gbc_lblPerfil.gridx = 2; gbc_lblPerfil.gridy = 1;
@@ -153,7 +144,6 @@ public class TelaGerenciarUsuarios extends JFrame {
 
 		painelInferior.add(painelFormulario, BorderLayout.CENTER);
 
-		// Painel de Botões
 		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
 		painelBotoes.setBackground(COR_FUNDO);
 
