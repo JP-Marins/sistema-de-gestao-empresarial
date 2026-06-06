@@ -1,30 +1,30 @@
-# Sistema de Gestao Empresarial
+# Sistema de Gestão Empresarial
 
-## Descricao
-Aplicacao desktop desenvolvida em Java (Swing) para gerenciamento empresarial, utilizando banco de dados MySQL para persistencia de dados. O projeto foca na implementacao de operacoes de CRUD (Create, Read, Update, Delete).
+## Descrição
+Aplicação desktop desenvolvida em Java (Swing) para gerenciamento empresarial, utilizando banco de dados MySQL para persistência de dados. O projeto foca na implementação de operações de CRUD (Create, Read, Update, Delete).
 
 ## Tecnologias
-- Java (JDK 17+)
+- Java (JDK 25)
 - Swing
 - MySQL
 - JDBC
 
 ## Funcionalidades
-- Autenticacao de usuarios.
-- Gestao de registros.
+- Autenticação de usuários.
+- Gestão de registros.
 - Gerenciamento de clientes.
-- Interface grafica focada em usabilidade.
+- Interface gráfica focada em usabilidade.
 
 ## Estrutura do Projeto
-- src/: Codigo fonte.
-- sql/: Scripts de criacao do banco de dados.
+- src/: Código fonte.
+- sql/: Scripts de criação do banco de dados.
 
 ## Como executar
-1. Clone o repositorio.
-2. Execute o script de criacao do banco de dados MySQL localizado na pasta sql/.
+1. Clone o repositório.
+2. Execute o script de criação do banco de dados MySQL localizado na pasta sql/.
 3. Importe o projeto como um "Existing Project" no Eclipse.
 4. Adicione o driver JDBC ao Build Path do projeto.
-5. Execute a classe principal da aplicacao.
+5. Execute a classe principal da aplicação.
 
-## Licenca
+## Licença
 Este projeto esta licenciado sob a licenca MIT.
