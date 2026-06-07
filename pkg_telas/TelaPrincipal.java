@@ -2,7 +2,6 @@ package pkg_telas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,124 +16,101 @@ import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
 
-	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
-	private final Color COR_FUNDO = Color.WHITE;
+    public TelaPrincipal() {
+        setTitle("Painel Principal - Sistema de Gestão");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 850, 600);
+        setLocationRelativeTo(null);
 
-	public TelaPrincipal() {
-		setTitle("Painel Principal - Construtora Eco");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 600);
-		setLocationRelativeTo(null); 
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(Color.WHITE);
+        setJMenuBar(menuBar);
 
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.WHITE);
-		setJMenuBar(menuBar);
+        JMenu menuCadastros = new JMenu("Cadastros");
+        menuCadastros.setFont(EstiloGlobal.FONTE_PADRAO);
+        menuBar.add(menuCadastros);
 
-		JMenu menuCadastros = new JMenu("Cadastros");
-		menuCadastros.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		menuBar.add(menuCadastros);
+        JMenuItem itemUsuarios = new JMenuItem("Gerenciar Usuários");
+        itemUsuarios.addActionListener(e -> new TelaGerenciarUsuarios().setVisible(true));
+        menuCadastros.add(itemUsuarios);
 
-		JMenuItem itemUsuarios = new JMenuItem("Gerenciar Usuários");
-		itemUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		itemUsuarios.addActionListener(e -> abrirGerenciamentoUsuarios());
-		menuCadastros.add(itemUsuarios);
+        JMenuItem itemClientes = new JMenuItem("Gerenciar Clientes");
+        itemClientes.addActionListener(e -> new TelaClientes().setVisible(true));
+        menuCadastros.add(itemClientes);
 
-		JMenuItem itemClientes = new JMenuItem("Gerenciar Clientes");
-		itemClientes.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		itemClientes.addActionListener(e -> abrirGerenciamentoClientes());
-		menuCadastros.add(itemClientes);
+        JMenuItem itemProjetos = new JMenuItem("Projetos / Demandas");
+        itemProjetos.addActionListener(e -> new TelaGerenciarProjetos().setVisible(true));
+        menuCadastros.add(itemProjetos);
 
-		JMenuItem itemProjetos = new JMenuItem("Projetos / Obras");
-		itemProjetos.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		itemProjetos.addActionListener(e -> abrirGerenciamentoProjetos());
-		menuCadastros.add(itemProjetos);
+        // Menu Relatórios
+        JMenu menuRelatorios = new JMenu("Relatórios");
+        menuRelatorios.setFont(EstiloGlobal.FONTE_PADRAO);
+        menuBar.add(menuRelatorios);
+        
+        JMenuItem itemPDF = new JMenuItem("Gerar PDFs");
+        itemPDF.addActionListener(e -> new TelaPDF().telaPdf.setVisible(true));
+        menuRelatorios.add(itemPDF);
 
-		JMenu menuSistema = new JMenu("Sistema");
-		menuSistema.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		menuBar.add(menuSistema);
+        JMenu menuSistema = new JMenu("Sistema");
+        menuSistema.setFont(EstiloGlobal.FONTE_PADRAO);
+        menuBar.add(menuSistema);
 
-		JMenuItem itemLogout = new JMenuItem("Fazer Logout");
-		itemLogout.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		itemLogout.addActionListener(e -> executarLogout());
-		menuSistema.add(itemLogout);
+        JMenuItem itemLogout = new JMenuItem("Fazer Logout");
+        itemLogout.addActionListener(e -> executarLogout());
+        menuSistema.add(itemLogout);
 
-		JMenuItem itemSair = new JMenuItem("Sair");
-		itemSair.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		itemSair.addActionListener(e -> System.exit(0));
-		menuSistema.add(itemSair);
+        JMenuItem itemSair = new JMenuItem("Sair");
+        itemSair.addActionListener(e -> System.exit(0));
+        menuSistema.add(itemSair);
 
-		contentPane = new JPanel();
-		contentPane.setBackground(COR_FUNDO);
-		contentPane.setBorder(new EmptyBorder(40, 60, 40, 60)); 
-		contentPane.setLayout(new BorderLayout(0, 30));
-		setContentPane(contentPane);
+        contentPane = new JPanel();
+        contentPane.setBackground(EstiloGlobal.COR_FUNDO);
+        contentPane.setBorder(new EmptyBorder(40, 60, 40, 60));
+        contentPane.setLayout(new BorderLayout(0, 30));
+        setContentPane(contentPane);
 
-		JLabel lblBoasVindas = new JLabel("Sistema de Gestão - Construtora Eco");
-		lblBoasVindas.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblBoasVindas.setForeground(COR_PRINCIPAL);
-		lblBoasVindas.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblBoasVindas, BorderLayout.NORTH);
+        JLabel lblBoasVindas = new JLabel("Painel de Controle Corporativo");
+        lblBoasVindas.setFont(EstiloGlobal.FONTE_TITULO);
+        lblBoasVindas.setForeground(EstiloGlobal.COR_PRINCIPAL);
+        lblBoasVindas.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblBoasVindas, BorderLayout.NORTH);
 
-		JPanel painelDashboard = new JPanel(new GridLayout(2, 2, 30, 30));
-		painelDashboard.setBackground(COR_FUNDO);
+        JPanel painelDashboard = new JPanel(new GridLayout(2, 2, 30, 30));
+        painelDashboard.setBackground(EstiloGlobal.COR_FUNDO);
 
-		JButton btnUsuarios = criarBotaoDashboard("Gerenciar Usuários");
-		JButton btnProjetos = criarBotaoDashboard("Projetos / Obras");
-		JButton btnClientes = criarBotaoDashboard("Clientes"); 
-		JButton btnLogout = criarBotaoDashboard("Fazer Logout");
+        JButton btnUsuarios = criarBotaoDashboard("Usuários do Sistema");
+        JButton btnProjetos = criarBotaoDashboard("Projetos e Demandas");
+        JButton btnClientes = criarBotaoDashboard("Carteira de Clientes");
+        JButton btnLogout = criarBotaoDashboard("Encerrar Sessão");
 
-		painelDashboard.add(btnUsuarios);
-		painelDashboard.add(btnProjetos);
-		painelDashboard.add(btnClientes);
-		painelDashboard.add(btnLogout);
+        painelDashboard.add(btnUsuarios);
+        painelDashboard.add(btnProjetos);
+        painelDashboard.add(btnClientes);
+        painelDashboard.add(btnLogout);
 
-		contentPane.add(painelDashboard, BorderLayout.CENTER);
+        contentPane.add(painelDashboard, BorderLayout.CENTER);
 
-		btnUsuarios.addActionListener(e -> abrirGerenciamentoUsuarios());
-		btnProjetos.addActionListener(e -> abrirGerenciamentoProjetos());
-		btnClientes.addActionListener(e -> abrirGerenciamentoClientes());
-		btnLogout.addActionListener(e -> executarLogout());
+        btnUsuarios.addActionListener(e -> new TelaGerenciarUsuarios().setVisible(true));
+        btnProjetos.addActionListener(e -> new TelaGerenciarProjetos().setVisible(true));
+        btnClientes.addActionListener(e -> new TelaClientes().setVisible(true));
+        btnLogout.addActionListener(e -> executarLogout());
+    }
 
-		JLabel lblRodape = new JLabel("Módulo de Controle Interno | Versão 1.0 ");
-		lblRodape.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblRodape.setForeground(Color.GRAY);
-		lblRodape.setHorizontalAlignment(SwingConstants.RIGHT);
-		contentPane.add(lblRodape, BorderLayout.SOUTH);
-	}
+    private JButton criarBotaoDashboard(String texto) {
+        JButton botao = new JButton(texto);
+        botao.setFont(EstiloGlobal.FONTE_TITULO);
+        botao.setBackground(EstiloGlobal.COR_PRINCIPAL);
+        botao.setForeground(Color.WHITE);
+        botao.setFocusPainted(false);
+        botao.setBorder(BorderFactory.createLineBorder(EstiloGlobal.COR_PRINCIPAL.darker(), 1));
+        return botao;
+    }
 
-
-	private JButton criarBotaoDashboard(String texto) {
-		JButton botao = new JButton(texto);
-		botao.setFont(new Font("Tahoma", Font.BOLD, 16));
-		botao.setBackground(COR_PRINCIPAL);
-		botao.setForeground(Color.WHITE);
-		botao.setFocusPainted(false);
-		botao.setBorder(BorderFactory.createLineBorder(COR_PRINCIPAL.darker(), 1));
-		return botao;
-	}
-
-	
-	private void abrirGerenciamentoUsuarios() {
-		TelaGerenciarUsuarios telaUsuarios = new TelaGerenciarUsuarios();
-		telaUsuarios.setVisible(true);
-	}
-
-	private void abrirGerenciamentoProjetos() {
-		TelaProjetos telaProjetos = new TelaProjetos();
-		telaProjetos.setVisible(true);
-	}
-
-	private void abrirGerenciamentoClientes() {
-		TelaClientes telaClientes = new TelaClientes();
-		telaClientes.setVisible(true);
-	}
-
-	private void executarLogout() { 
-		TelaDeLogin login = new TelaDeLogin();
-		login.setVisible(true);
-		this.dispose();
-	}
+    private void executarLogout() {
+        new TelaDeLogin().setVisible(true);
+        this.dispose();
+    }
 }

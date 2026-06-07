@@ -1,14 +1,11 @@
 package pkg_telas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -27,235 +24,201 @@ import pkg_database.UsuarioDAO;
 
 public class TelaGerenciarUsuarios extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTable tabelaUsuarios;
-	private DefaultTableModel modeloTabela;
-	
-	private final Color COR_PRINCIPAL = new Color(0, 146, 69);
-	private final Color COR_FUNDO = Color.WHITE;
-	private final Color COR_PAINEIS = Color.decode("#F8F9FA");
-	private final Font FONTE_PADRAO = new Font("Tahoma", Font.PLAIN, 14);
-	private final Font FONTE_TITULO = new Font("Tahoma", Font.BOLD, 22);
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTable tabelaUsuarios;
+    private DefaultTableModel modeloTabela;
 
-	private JTextField txtId, txtUsuario;
-	private JPasswordField txtSenha;
-	private JComboBox<String> comboPerfil;
-	
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private JTextField txtId, txtUsuario;
+    private JPasswordField txtSenha;
+    private JComboBox<String> comboPerfil;
 
-	public TelaGerenciarUsuarios() {
-		setTitle("Gerenciamento de Usuários - Construtora Eco");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 800, 550);
-		setLocationRelativeTo(null);
-		
-		contentPane = new JPanel();
-		contentPane.setBackground(COR_FUNDO);
-		contentPane.setBorder(new EmptyBorder(15, 15, 15, 15));
-		contentPane.setLayout(new BorderLayout(0, 15));
-		setContentPane(contentPane);
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-		JPanel painelTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		painelTitulo.setBackground(COR_FUNDO);
-		JLabel lblTitulo = new JLabel("Controle de Usuários e Acessos");
-		lblTitulo.setFont(FONTE_TITULO);
-		lblTitulo.setForeground(COR_PRINCIPAL);
-		painelTitulo.add(lblTitulo);
-		contentPane.add(painelTitulo, BorderLayout.NORTH);
+    public TelaGerenciarUsuarios() {
+        setTitle("Gerenciamento de Usuários - Construtora Eco");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 800, 550);
+        setLocationRelativeTo(null);
 
-		String[] colunas = {"ID", "Nome de Usuário", "Perfil de Acesso"};
-		modeloTabela = new DefaultTableModel(colunas, 0) {
-			private static final long serialVersionUID = 1L;
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		tabelaUsuarios = new JTable(modeloTabela);
-		tabelaUsuarios.setFont(FONTE_PADRAO);
-		tabelaUsuarios.setRowHeight(22);
-		
-		JScrollPane scrollTabela = new JScrollPane(tabelaUsuarios);
-		contentPane.add(scrollTabela, BorderLayout.CENTER);
+        contentPane = new JPanel();
+        contentPane.setBackground(EstiloGlobal.COR_FUNDO);
+        contentPane.setBorder(new EmptyBorder(15, 15, 15, 15));
+        contentPane.setLayout(new BorderLayout(0, 15));
+        setContentPane(contentPane);
 
-		JPanel painelInferior = new JPanel(new BorderLayout(0, 10));
-		painelInferior.setBackground(COR_FUNDO);
+        JPanel painelTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        painelTitulo.setBackground(EstiloGlobal.COR_FUNDO);
+        JLabel lblTitulo = new JLabel("Controle de Usuários e Acessos");
+        lblTitulo.setFont(EstiloGlobal.FONTE_TITULO);
+        lblTitulo.setForeground(EstiloGlobal.COR_PRINCIPAL);
+        painelTitulo.add(lblTitulo);
+        contentPane.add(painelTitulo, BorderLayout.NORTH);
 
-		JPanel painelFormulario = new JPanel(new GridBagLayout());
-		painelFormulario.setBackground(COR_PAINEIS);
-		painelFormulario.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(COR_PRINCIPAL), "Dados do Usuário", 0, 0, FONTE_PADRAO, COR_PRINCIPAL));
+        String[] colunas = {"ID", "Nome de Usuário", "Perfil de Acesso"};
+        modeloTabela = new DefaultTableModel(colunas, 0) {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
+        };
+        tabelaUsuarios = new JTable(modeloTabela);
+        tabelaUsuarios.setFont(EstiloGlobal.FONTE_PADRAO);
+        tabelaUsuarios.setRowHeight(22);
 
-		GridBagConstraints gbc_lblId = new GridBagConstraints();
-		gbc_lblId.insets = new Insets(10, 10, 5, 5);
-		gbc_lblId.gridx = 0; gbc_lblId.gridy = 0;
-		gbc_lblId.anchor = GridBagConstraints.WEST;
-		painelFormulario.add(criarLabel("ID:"), gbc_lblId);
+        JScrollPane scrollTabela = new JScrollPane(tabelaUsuarios);
+        contentPane.add(scrollTabela, BorderLayout.CENTER);
 
-		GridBagConstraints gbc_txtId = new GridBagConstraints();
-		gbc_txtId.insets = new Insets(10, 5, 5, 10);
-		gbc_txtId.gridx = 1; gbc_txtId.gridy = 0;
-		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
-		txtId = new JTextField(5);
-		txtId.setEditable(false);
-		painelFormulario.add(txtId, gbc_txtId);
+        JPanel painelInferior = new JPanel(new BorderLayout(0, 10));
+        painelInferior.setBackground(EstiloGlobal.COR_FUNDO);
 
-		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
-		gbc_lblUsuario.insets = new Insets(10, 10, 5, 5);
-		gbc_lblUsuario.gridx = 2; gbc_lblUsuario.gridy = 0;
-		gbc_lblUsuario.anchor = GridBagConstraints.WEST;
-		painelFormulario.add(criarLabel("Usuário:"), gbc_lblUsuario);
+        JPanel painelFormulario = new JPanel(new GridBagLayout());
+        painelFormulario.setBackground(EstiloGlobal.COR_PAINEIS);
+        painelFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(EstiloGlobal.COR_PRINCIPAL), "Dados do Usuário", 0, 0, EstiloGlobal.FONTE_PADRAO, EstiloGlobal.COR_PRINCIPAL));
 
-		GridBagConstraints gbc_txtUsuario = new GridBagConstraints();
-		gbc_txtUsuario.insets = new Insets(10, 5, 5, 10);
-		gbc_txtUsuario.gridx = 3; gbc_txtUsuario.gridy = 0;
-		gbc_txtUsuario.weightx = 1.0;
-		gbc_txtUsuario.fill = GridBagConstraints.HORIZONTAL;
-		txtUsuario = new JTextField(15);
-		painelFormulario.add(txtUsuario, gbc_txtUsuario);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
-		gbc_lblSenha.insets = new Insets(5, 10, 10, 5);
-		gbc_lblSenha.gridx = 0; gbc_lblSenha.gridy = 1;
-		gbc_lblSenha.anchor = GridBagConstraints.WEST;
-		painelFormulario.add(criarLabel("Senha:"), gbc_lblSenha);
+        gbc.gridx = 0; gbc.gridy = 0;
+        painelFormulario.add(EstiloGlobal.criarLabel("ID:"), gbc);
+        gbc.gridx = 1;
+        txtId = new JTextField(5);
+        txtId.setEditable(false);
+        painelFormulario.add(txtId, gbc);
 
-		GridBagConstraints gbc_txtSenha = new GridBagConstraints();
-		gbc_txtSenha.insets = new Insets(5, 5, 10, 5);
-		gbc_txtSenha.gridx = 1; gbc_txtSenha.gridy = 1;
-		gbc_txtSenha.fill = GridBagConstraints.HORIZONTAL;
-		txtSenha = new JPasswordField(10);
-		painelFormulario.add(txtSenha, gbc_txtSenha);
+        gbc.gridx = 2;
+        painelFormulario.add(EstiloGlobal.criarLabel("Usuário:"), gbc);
+        gbc.gridx = 3;
+        txtUsuario = new JTextField(15);
+        painelFormulario.add(txtUsuario, gbc);
 
-		GridBagConstraints gbc_lblPerfil = new GridBagConstraints();
-		gbc_lblPerfil.insets = new Insets(5, 10, 10, 5);
-		gbc_lblPerfil.gridx = 2; gbc_lblPerfil.gridy = 1;
-		gbc_lblPerfil.anchor = GridBagConstraints.WEST;
-		painelFormulario.add(criarLabel("Perfil:"), gbc_lblPerfil);
+        gbc.gridx = 0; gbc.gridy = 1;
+        painelFormulario.add(EstiloGlobal.criarLabel("Senha:"), gbc);
+        gbc.gridx = 1;
+        txtSenha = new JPasswordField(10);
+        painelFormulario.add(txtSenha, gbc);
 
-		GridBagConstraints gbc_comboPerfil = new GridBagConstraints();
-		gbc_comboPerfil.insets = new Insets(5, 5, 10, 10);
-		gbc_comboPerfil.gridx = 3; gbc_comboPerfil.gridy = 1;
-		gbc_comboPerfil.fill = GridBagConstraints.HORIZONTAL;
-		comboPerfil = new JComboBox<>(new String[] {"Administrador", "Engenheiro", "Financeiro", "Operador"});
-		comboPerfil.setFont(FONTE_PADRAO);
-		painelFormulario.add(comboPerfil, gbc_comboPerfil);
+        gbc.gridx = 2;
+        painelFormulario.add(EstiloGlobal.criarLabel("Perfil:"), gbc);
+        gbc.gridx = 3;
+        comboPerfil = new JComboBox<>(new String[] {"Administrador", "Engenheiro", "Financeiro", "Operador"});
+        comboPerfil.setFont(EstiloGlobal.FONTE_PADRAO);
+        painelFormulario.add(comboPerfil, gbc);
 
-		painelInferior.add(painelFormulario, BorderLayout.CENTER);
+        painelInferior.add(painelFormulario, BorderLayout.CENTER);
 
-		JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
-		painelBotoes.setBackground(COR_FUNDO);
+        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
+        painelBotoes.setBackground(EstiloGlobal.COR_FUNDO);
 
-		JButton btnSalvar = criarBotao("Cadastrar");
-		JButton btnAlterar = criarBotao("Alterar");
-		JButton btnExcluir = criarBotao("Excluir");
+        JButton btnSalvar = EstiloGlobal.criarBotao("Cadastrar");
+        JButton btnAlterar = EstiloGlobal.criarBotao("Alterar");
+        JButton btnExcluir = EstiloGlobal.criarBotao("Excluir");
+        JButton btnVoltar = EstiloGlobal.criarBotao("Voltar");
 
-		painelBotoes.add(btnSalvar);
-		painelBotoes.add(btnAlterar);
-		painelBotoes.add(btnExcluir);
+        painelBotoes.add(btnSalvar);
+        painelBotoes.add(btnAlterar);
+        painelBotoes.add(btnExcluir);
+        painelBotoes.add(btnVoltar);
 
-		painelInferior.add(painelBotoes, BorderLayout.SOUTH);
-		contentPane.add(painelInferior, BorderLayout.SOUTH);
+        painelInferior.add(painelBotoes, BorderLayout.SOUTH);
+        contentPane.add(painelInferior, BorderLayout.SOUTH);
 
-		// --- INTERAÇÕES DO CRUD REAL ---
+        // Ações
+        btnSalvar.addActionListener(e -> cadastrarUsuario());
+        btnAlterar.addActionListener(e -> alterarUsuario());
+        btnExcluir.addActionListener(e -> excluirUsuario());
+        btnVoltar.addActionListener(e -> this.dispose());
 
-		// CADASTRAR
-		btnSalvar.addActionListener(e -> {
-			String senha = new String(txtSenha.getPassword());
-			if (txtUsuario.getText().trim().isEmpty() || senha.trim().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Preencha o usuário e a senha!");
-				return;
-			}
-			Usuario u = new Usuario(null, txtUsuario.getText(), senha, comboPerfil.getSelectedItem().toString());
-			usuarioDAO.inserir(u);
-			JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
-			limparCampos();
-			atualizarTabelaReal();
-		});
+        tabelaUsuarios.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && tabelaUsuarios.getSelectedRow() != -1) {
+                int linha = tabelaUsuarios.getSelectedRow();
+                txtId.setText(modeloTabela.getValueAt(linha, 0).toString());
+                txtUsuario.setText(modeloTabela.getValueAt(linha, 1).toString());
+                comboPerfil.setSelectedItem(modeloTabela.getValueAt(linha, 2).toString());
+                txtSenha.setText("");
+            }
+        });
 
-		// ALTERAR
-		btnAlterar.addActionListener(e -> {
-			if (txtId.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela para alterar!");
-				return;
-			}
-			String senha = new String(txtSenha.getPassword());
-			if (senha.trim().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Digite a senha atual ou uma nova senha para confirmar a alteração.");
-				return;
-			}
-			Usuario u = new Usuario(txtId.getText(), txtUsuario.getText(), senha, comboPerfil.getSelectedItem().toString());
-			usuarioDAO.atualizar(u);
-			JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
-			limparCampos();
-			atualizarTabelaReal();
-		});
+        atualizarTabela();
+    }
 
-		// EXCLUIR
-		btnExcluir.addActionListener(e -> {
-			if (txtId.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela para excluir!");
-				return;
-			}
-			int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
-			if (confirmacao == JOptionPane.YES_OPTION) {
-				usuarioDAO.excluir(txtId.getText());
-				JOptionPane.showMessageDialog(this, "Usuário removido.");
-				limparCampos();
-				atualizarTabelaReal();
-			}
-		});
+    private void atualizarTabela() {
+        modeloTabela.setRowCount(0);
+        try {
+            List<Usuario> lista = usuarioDAO.listarTodos();
+            for (Usuario u : lista) {
+                modeloTabela.addRow(new Object[]{u.getId(), u.getUsuario(), u.getPerfil()});
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar usuários:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-		// CLIQUE NA TABELA
-		tabelaUsuarios.getSelectionModel().addListSelectionListener(e -> {
-			if (!e.getValueIsAdjusting() && tabelaUsuarios.getSelectedRow() != -1) {
-				int linha = tabelaUsuarios.getSelectedRow();
-				txtId.setText(modeloTabela.getValueAt(linha, 0).toString());
-				txtUsuario.setText(modeloTabela.getValueAt(linha, 1).toString());
-				comboPerfil.setSelectedItem(modeloTabela.getValueAt(linha, 2).toString());
-				txtSenha.setText(""); // Por segurança, pede para digitar a senha novamente
-			}
-		});
+    private void cadastrarUsuario() {
+        String usuario = txtUsuario.getText().trim();
+        String senha = new String(txtSenha.getPassword()).trim();
+        if (usuario.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha usuário e senha!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Usuario u = new Usuario(0, usuario, senha, comboPerfil.getSelectedItem().toString());
+        try {
+            usuarioDAO.inserir(u);
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+            limparCampos();
+            atualizarTabela();
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-		// Inicializa buscando do banco
-		atualizarTabelaReal();
-	}
+    private void alterarUsuario() {
+        if (txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela para alterar!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String senha = new String(txtSenha.getPassword()).trim();
+        if (senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite a senha (atual ou nova) para confirmar a alteração.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int id = Integer.parseInt(txtId.getText());
+        Usuario u = new Usuario(id, txtUsuario.getText().trim(), senha, comboPerfil.getSelectedItem().toString());
+        try {
+            usuarioDAO.atualizar(u);
+            JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
+            limparCampos();
+            atualizarTabela();
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-	private JLabel criarLabel(String texto) {
-		JLabel label = new JLabel(texto);
-		label.setFont(FONTE_PADRAO);
-		label.setForeground(Color.BLACK);
-		return label;
-	}
+    private void excluirUsuario() {
+        if (txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela para excluir!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            int id = Integer.parseInt(txtId.getText());
+            try {
+                usuarioDAO.excluir(id);
+                JOptionPane.showMessageDialog(this, "Usuário removido.");
+                limparCampos();
+                atualizarTabela();
+            } catch (RuntimeException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 
-	private JButton criarBotao(String texto) {
-		JButton botao = new JButton(texto);
-		botao.setFont(new Font("Tahoma", Font.BOLD, 13));
-		botao.setBackground(COR_PRINCIPAL);
-		botao.setForeground(Color.WHITE);
-		botao.setFocusPainted(false);
-		botao.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
-		return botao;
-	}
-
-	private void limparCampos() {
-		txtId.setText("");
-		txtUsuario.setText("");
-		txtSenha.setText("");
-		comboPerfil.setSelectedIndex(0);
-		tabelaUsuarios.clearSelection();
-	}
-
-	private void atualizarTabelaReal() {
-		modeloTabela.setRowCount(0);
-		List<Usuario> lista = usuarioDAO.listarTodos();
-		for (Usuario u : lista) {
-			modeloTabela.addRow(new Object[] {
-				u.getId(),
-				u.getUsuario(),
-				u.getPerfil()
-			});
-		}
-	}
+    private void limparCampos() {
+        txtId.setText("");
+        txtUsuario.setText("");
+        txtSenha.setText("");
+        comboPerfil.setSelectedIndex(0);
+        tabelaUsuarios.clearSelection();
+    }
 }

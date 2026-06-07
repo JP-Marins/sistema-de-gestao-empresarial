@@ -1,23 +1,43 @@
--- Criacao do banco de dados
+-- Criação do banco de dados
 CREATE DATABASE IF NOT EXISTS bd_engenheiros;
 USE bd_engenheiros;
 
--- Tabela para autenticacao de usuarios
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+-- Tabela de usuários (compatível com UsuarioDAO e Usuario.java)
+CREATE TABLE IF NOT EXISTS tb_usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL
+    senha VARCHAR(255) NOT NULL,
+    perfil VARCHAR(30) NOT NULL
 );
 
--- Tabela para gerenciamento de clientes
-CREATE TABLE IF NOT EXISTS clientes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
+-- Tabela de clientes (compatível com ClienteDAO e Cliente.java)
+CREATE TABLE IF NOT EXISTS tb_clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cliente VARCHAR(100) NOT NULL,
+    cpf_cnpj VARCHAR(20) NOT NULL UNIQUE,
     telefone VARCHAR(20),
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(100)
 );
 
--- Insercao de usuario administrador padrao
-INSERT IGNORE INTO usuarios (usuario, senha) 
-VALUES ('admin', 'admin123');
+-- Tabela de engenheiros (compatível com EngenheiroDAO e Engenheiro.java)
+CREATE TABLE IF NOT EXISTS tb_engenheiros (
+    id_engenheiro INT AUTO_INCREMENT PRIMARY KEY,
+    nome_completo VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    email VARCHAR(100),
+    telefone VARCHAR(20)
+);
+
+-- Tabela de projetos (compatível com ProjetoDAO e Projeto.java)
+CREATE TABLE IF NOT EXISTS tb_projetos (
+    id_projeto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_projeto VARCHAR(100) NOT NULL,
+    data_inicial VARCHAR(10),
+    data_final VARCHAR(10),
+    engenheiro_responsavel VARCHAR(100),
+    status_do_projeto VARCHAR(30)
+);
+
+-- Inserção de um usuário administrador padrão
+INSERT INTO tb_usuarios (usuario, senha, perfil) 
+VALUES ('admin', 'admin123', 'Administrador');

@@ -7,7 +7,6 @@ public class Cliente {
     private String telefone;
     private String email;
 
-  
     public Cliente(int id, String nome, String cpfCnpj, String telefone, String email) {
         this.id = id;
         this.nome = nome;
@@ -16,7 +15,6 @@ public class Cliente {
         this.email = email;
     }
 
-    // Getters e Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
