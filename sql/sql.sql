@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS bd_engenheiros;
 USE bd_engenheiros;
 
--- Tabela de usuários (compatível com UsuarioDAO e Usuario.java)
+-- Tabela de usuários
 CREATE TABLE IF NOT EXISTS tb_usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS tb_usuarios (
     perfil VARCHAR(30) NOT NULL
 );
 
--- Tabela de clientes (compatível com ClienteDAO e Cliente.java)
+-- Tabela de clientes
 CREATE TABLE IF NOT EXISTS tb_clientes (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nome_cliente VARCHAR(100) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS tb_clientes (
     email VARCHAR(100)
 );
 
--- Tabela de engenheiros (compatível com EngenheiroDAO e Engenheiro.java)
+-- Tabela de engenheiros
 CREATE TABLE IF NOT EXISTS tb_engenheiros (
     id_engenheiro INT AUTO_INCREMENT PRIMARY KEY,
     nome_completo VARCHAR(100) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS tb_engenheiros (
     telefone VARCHAR(20)
 );
 
--- Tabela de projetos (compatível com ProjetoDAO e Projeto.java)
+-- Tabela de projetos
 CREATE TABLE IF NOT EXISTS tb_projetos (
     id_projeto INT AUTO_INCREMENT PRIMARY KEY,
     nome_projeto VARCHAR(100) NOT NULL,
